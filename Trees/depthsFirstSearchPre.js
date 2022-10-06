@@ -52,6 +52,7 @@ class BinarySearchTree {
     return this
   }
 
+  // Similar to the DFS post, but pre adds the node to visited first, and then runs.
   traverse (node, visited) {
     visited.push(node)
 

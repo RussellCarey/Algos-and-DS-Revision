@@ -52,15 +52,20 @@ class BinarySearchTree {
     return this
   }
 
+  // Helper functon to traverse tree
+  // Recursive function.
   traverse (node, visited) {
+    // If we have a left move to that node
     if (node.left) {
       this.traverse(node.left, visited)
     }
 
+    // If we have a right move to the right
     if (node.right) {
       this.traverse(node.right, visited)
     }
 
+    // Push the node to the visited array
     visited.push(node)
   }
 
