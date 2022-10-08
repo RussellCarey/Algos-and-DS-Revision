@@ -20,18 +20,60 @@ class MaxBinaryHeap {
         this.heap[cInd] = this.heap[pInd]
         this.heap[pInd] = curr
       } else {
+        console.log('Updated heap')
         console.log(this.heap)
         finish = true
       }
       cInd = pInd
     }
   }
+
+  extract () {
+    console.log('Starting extract')
+    console.log(this.heap)
+    // Swap first value with the last value
+    const head = this.heap[0]
+    this.heap[0] = this.heap[this.heap.length - 1]
+    this.heap[this.heap.length - 1] = head
+
+    // Pop last values so we can return it at the end.
+    const extracted = this.heap.pop()
+
+    // Sink down
+    // Parent index starts at 0 - (2 * i) + 1 left child and right is plus 2
+    let currRoot = 0
+
+    while (currRoot !== null) {
+      // if left or right child is greater than the element, swap. If both are larger swap with the largest
+      let left = currRoot * 2 + 1
+      let right = currRoot * 2 + 2
+
+      // The child becomes the new parent index
+      let largestValueInd = this.heap[left] > this.heap[right] ? left : right
+
+      if (this.heap[largestValueInd] > this.heap[currRoot]) {
+        const currRootVal = this.heap[currRoot]
+        this.heap[currRoot] = this.heap[largestValueInd]
+        this.heap[largestValueInd] = currRootVal
+        currRoot = largestValueInd
+      } else {
+        currRoot = null
+      }
+    }
+
+    console.log('heap')
+    console.log(this.heap)
+    console.log(`Extract: ${extracted}`)
+    return extracted
+  }
 }
 
 const heap = new MaxBinaryHeap()
-heap.insert(10)
-heap.insert(5)
-heap.insert(52)
-heap.insert(51)
-heap.insert(22)
-heap.insert(44)
+
+for (let i = 0; i < 100; i++) {
+  heap.insert(Math.ceil(Math.random() * 1000))
+}
+
+for (let i = 0; i < 50; i++) {
+  heap.extract()
+}
