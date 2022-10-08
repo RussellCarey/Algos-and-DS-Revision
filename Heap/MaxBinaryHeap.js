@@ -31,6 +31,9 @@ class MaxBinaryHeap {
   extract () {
     console.log('Starting extract')
     console.log(this.heap)
+
+    if (this.heap.length === 1) return this.heap.pop()
+
     // Swap first value with the last value
     const head = this.heap[0]
     this.heap[0] = this.heap[this.heap.length - 1]
@@ -52,11 +55,15 @@ class MaxBinaryHeap {
       let largestValueInd = this.heap[left] > this.heap[right] ? left : right
 
       if (this.heap[largestValueInd] > this.heap[currRoot]) {
+        // Swap the parent with the largest child if needed.
         const currRootVal = this.heap[currRoot]
         this.heap[currRoot] = this.heap[largestValueInd]
         this.heap[largestValueInd] = currRootVal
+
+        // Set new root as the swapped child index.
         currRoot = largestValueInd
       } else {
+        // If it cant find a child, or I set it as null. Finish.
         currRoot = null
       }
     }
