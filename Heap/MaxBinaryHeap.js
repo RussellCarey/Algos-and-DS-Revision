@@ -29,9 +29,6 @@ class MaxBinaryHeap {
   }
 
   extract () {
-    console.log('Starting extract')
-    console.log(this.heap)
-
     if (this.heap.length === 1) return this.heap.pop()
 
     // Swap first value with the last value
